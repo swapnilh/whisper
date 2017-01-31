@@ -1,0 +1,18 @@
+[submodule "benchmarks/echo"]
+	path = benchmarks/echo
+	url = https://github.com/snalli/echo.git
+[submodule "benchmarks/redis"]
+	path = benchmarks/redis
+	url = https://github.com/snalli/redis.git
+[submodule "benchmarks/nstore"]
+	path = benchmarks/nstore
+	url = https://github.com/snalli/nstore.git
+[submodule "benchmarks/mnemosyne-gcc"]
+	path = benchmarks/mnemosyne-gcc
+	url = https://github.com/snalli/mnemosyne-gcc.git
+[submodule "benchmarks/PMFS-new"]
+	path = benchmarks/PMFS-new
+	url = https://github.com/snalli/PMFS-new.git
+[submodule "benchmarks/nvml"]
+	path = benchmarks/nvml
+	url = https://github.com/snalli/nvml.git
