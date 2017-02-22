@@ -14,3 +14,30 @@ future PM interfaces. Please read our
 [paper](http://research.cs.wisc.edu/multifacet/papers/asplos17_whisper.pdf) for
 more details. Contact Swapnil (swapnilh at cs dot wisc edu) or Sanketh (sankey
 at cs dot wisc dot edu) for details.
+
+## Download instructions
+We use git submodules to track each of the individual applications of the suite.
+As such, simply doing 'git clone' only retrieves the wrapper repo, and not
+each of the workloads. Follow these steps to download **WHISPER**.
+
+    git clone https://github.com/swapnilh/whisper
+    cd whisper
+    git submodule update --init
+    python install.py -h
+
+
+## Install instructions
+We have provided a simple install.py which handles installation and cleans of
+the individual workloads. It can be run as :
+
+    python install.py <workloadA workloadB ..> --build --clean
+
+List of workloads: ['echo', 'nstore', 'nvml', 'redis', 'mnemosyne']
+Use all to build all the workloads.
+
+Examples:
+For a clean build of all workloads:
+    python install.py all --build --clean
+
+For simply building echo and nvml:
+    python install.py echo nvml --build
