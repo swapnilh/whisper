@@ -28,9 +28,9 @@ each of the workloads. Follow these steps to download **WHISPER**.
 
 ## Install instructions
 We have provided a simple install.py which handles installation and cleans of
-the individual workloads. It can be run as :
+the individual workloads (except PMFS). It can be run as :
 
-    python install.py <workloadA workloadB ..> --build --clean
+    python install.py <workloadA workloadB ..> [--build] [--clean]
 
 List of workloads: ['echo', 'nstore', 'nvml', 'redis', 'mnemosyne']
 Use all to build all the workloads.
@@ -41,3 +41,20 @@ For a clean build of all workloads:
 
 For simply building echo and nvml:
     python install.py echo nvml --build
+
+
+## Run instructions
+We have provided a simple run.py which can run the default simulations for most
+workloads (except PMFS). It can be run as :
+    usage: run.py [-h] [--sim_size SIM_SIZE] [--variant VARIANT] workload [workload ...]
+
+    arguments:
+    workload             workload to be executed: 
+                        echo, tpcc, ycsb, nvml, redis, mnemosyne
+    SIM_SIZE             Simulation size: test, small, medium, large
+    VARIANT              tpcc/ycsb (for echo), hashmap/ctree (for nvml),
+                       vacation/memcached (for mnemosyne)
+
+Examples:
+To run tpcc on echo with the small simulation size:
+    python run.py --sim_size small --variant tpcc echo
