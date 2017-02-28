@@ -15,6 +15,10 @@ def runCmd(cmd, err, out):
     """
     print cmd
     (stdout, stderr) = Popen(cmd, shell=True, stdout=PIPE).communicate()
+    if stdout:
+        print stdout
+    if stderr:
+        print stderr
     if err is None:
         if stdout != "":
             print "Error: %s" %(out,)
