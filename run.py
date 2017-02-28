@@ -6,7 +6,7 @@ import sys
 import os
 from subprocess import Popen, PIPE
 
-workloads = ['echo', 'tpcc', 'ycsb', 'nvml', 'redis', 'mnemosyne']
+workloads = ['echo', 'tpcc', 'ycsb', 'nvml', 'redis', 'mnemosyne-gcc']
 
 def runCmd(cmd, err, out, display = False):
     """

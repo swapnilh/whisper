@@ -32,7 +32,7 @@ the individual workloads (except PMFS). It can be run as :
 
     python install.py <workloadA workloadB ..> [--build] [--clean]
 
-List of workloads: ['echo', 'nstore', 'nvml', 'redis', 'mnemosyne']
+List of workloads: ['echo', 'nstore', 'nvml', 'redis', 'mnemosyne-gcc']
 Use all to build all the workloads.
 
 Examples:
@@ -50,7 +50,7 @@ workloads (except PMFS). It can be run as :
 
     arguments:
     workload             workload to be executed: 
-                        echo, tpcc, ycsb, nvml, redis, mnemosyne
+                        echo, tpcc, ycsb, nvml, redis, mnemosyne-gcc
     SIM_SIZE             Simulation size: test, small, medium, large
     VARIANT              tpcc/ycsb (for echo), hashmap/ctree (for nvml),
                        vacation/memcached (for mnemosyne)
