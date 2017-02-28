@@ -52,11 +52,11 @@ def main(argv):
         os.chdir("benchmarks/%s" % (workload,))
         buildCmd = "python install.py "
         if args.clean == True:
-#            print "Cleaning " + workload
+            print "Cleaning " + workload
             buildCmd += "--c "
         if args.build == True:
             buildCmd += "--b "
-#            print "Building " + workload
+            print "Building " + workload
         runCmd(buildCmd, "Failed", "Building %s Failed" % (workload,))    
         os.chdir("../../")
 
