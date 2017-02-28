@@ -46,7 +46,7 @@ def main(argv):
     parser.add_argument('--sim_size', dest='sim_size', action='store', 
             default='test', help='Simulation size: test, small, medium, large')
     parser.add_argument('--variant', dest='variant', action='store', 
-            default='test', help='tpcc/ycsb (for echo), hashmap/ctree (for nvml), vacation/memcached (for mnemosyne)')
+            default='default', help='tpcc/ycsb (for echo), hashmap/ctree (for nvml), vacation/memcached (for mnemosyne)')
 
     args = parser.parse_args()
 

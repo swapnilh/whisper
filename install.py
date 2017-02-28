@@ -57,7 +57,7 @@ def main(argv):
         if args.build == True:
             buildCmd += "--b "
 #            print "Building " + workload
-        runCmd(buildCmd, None, "Building %s Failed" % (workload,))    
+        runCmd(buildCmd, "Failed", "Building %s Failed" % (workload,))    
         os.chdir("../../")
 
 if __name__ == "__main__":
