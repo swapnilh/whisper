@@ -15,6 +15,17 @@ future PM interfaces. Please read our
 more details. Contact Swapnil (swapnilh at cs dot wisc edu) or Sanketh (sankey
 at cs dot wisc dot edu) for details.
 
+## IMPORTANT
+Whisper is currently in testing phase. If you come across any bugs or issues, please
+contact  Swapnil (swapnilh at cs dot wisc edu) or Sanketh (sankey
+at cs dot wisc dot edu). Also get in touch with us if you want to suggest any 
+workloads for inclusion in our next release.
+
+## Dependencies
+glib2-devel or libglib2.0-dev
+libtoolize
+librpmem
+
 ## Download instructions
 We use git submodules to track each of the individual applications of the suite.
 As such, simply doing 'git clone' only retrieves the wrapper repo, and not
