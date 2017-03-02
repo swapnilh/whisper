@@ -31,7 +31,7 @@ We use git submodules to track each of the individual applications of the suite.
 As such, simply doing 'git clone' only retrieves the wrapper repo, and not
 each of the workloads. Follow these steps to download **WHISPER**.
 
-    git clone https://github.com/swapnilh/whisper
+    git clone https://github.com/swapnilh/whisper.git
     cd whisper
     git submodule update --init
     python install.py -h
