@@ -1,7 +1,3 @@
-[submodule "echo"]
-	path = echo
-	url = https://github.com/snalli/echo
-	branch = master
 [submodule "nstore"]
 	path = nstore
 	url = https://github.com/snalli/nstore
