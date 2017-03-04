@@ -1,18 +1,20 @@
-[submodule "benchmarks/echo"]
-	path = benchmarks/echo
-	url = https://github.com/snalli/echo.git
-[submodule "benchmarks/redis"]
-	path = benchmarks/redis
-	url = https://github.com/snalli/redis.git
-[submodule "benchmarks/nstore"]
-	path = benchmarks/nstore
-	url = https://github.com/snalli/nstore.git
-[submodule "benchmarks/mnemosyne-gcc"]
-	path = benchmarks/mnemosyne-gcc
-	url = https://github.com/snalli/mnemosyne-gcc.git
-[submodule "benchmarks/PMFS-new"]
-	path = benchmarks/PMFS-new
-	url = https://github.com/snalli/PMFS-new.git
-[submodule "benchmarks/nvml"]
-	path = benchmarks/nvml
-	url = https://github.com/snalli/nvml.git
+[submodule "nstore"]
+	path = nstore
+	url = https://github.com/snalli/nstore
+	branch = placement_new_on_psegments
+[submodule "mnemosyne-gcc"]
+	path = mnemosyne-gcc
+	url = https://github.com/snalli/mnemosyne-gcc
+	branch = master
+[submodule "nvml"]
+	path = nvml
+	url = https://github.com/snalli/nvml
+	branch = master
+[submodule "redis"]
+	path = redis
+	url = https://github.com/snalli/redis
+	branch = 3.2-nvml
+[submodule "echo-kv"]
+	path = echo-kv
+	url = https://github.com/snalli/echo
+	branch = bailey
