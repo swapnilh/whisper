@@ -44,6 +44,8 @@ at cs dot wisc dot edu).
 	$ cd whisper
 	$ ./script -u
 	git submodule update --remote
+	git submodule update status
+
 ~~~
 
 ## For help:
