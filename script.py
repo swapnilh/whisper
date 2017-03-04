@@ -36,7 +36,7 @@ workload_l.append(__all)
 
 __home = os.getcwd()
 __nstr = 'nstore'
-__echo = 'echo-kv/echo/src'
+__echo = 'kv-echo/echo/src'
 __nemo = 'mnemosyne-gcc/usermode'
 __nvml = 'nvml'
 __reds = 'redis'

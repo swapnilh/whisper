@@ -18,3 +18,7 @@
 	path = PMFS-new
 	url = https://github.com/snalli/PMFS-new
 	branch = master
+[submodule "kv-echo"]
+	path = kv-echo
+	url = https://github.com/snalli/echo
+	branch = bailey
