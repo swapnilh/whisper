@@ -14,7 +14,11 @@
 	path = redis
 	url = https://github.com/snalli/redis
 	branch = 3.2-nvml
-[submodule "echo-kv"]
-	path = echo-kv
+[submodule "PMFS-new"]
+	path = PMFS-new
+	url = https://github.com/snalli/PMFS-new
+	branch = master
+[submodule "kv-echo"]
+	path = kv-echo
 	url = https://github.com/snalli/echo
 	branch = bailey
