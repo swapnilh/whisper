@@ -14,7 +14,12 @@ PLEASE USE AT YOUR OWN RISK.
 Report issues and suggestions to Swapnil (swapnilh at cs dot wisc edu) or Sanketh (sankey
 at cs dot wisc dot edu). 
 
-## To download: 
+## To download:
+~~~
+   	$ git clone --recursive https://github.com/swapnilh/whisper.git
+	$ cd whisper
+~~~
+OR 
 ~~~
    	$ git clone https://github.com/swapnilh/whisper.git
 	$ cd whisper
