@@ -14,3 +14,7 @@
 	path = redis
 	url = https://github.com/snalli/redis
 	branch = 3.2-nvml
+[submodule "echo-kv"]
+	path = echo-kv
+	url = https://github.com/snalli/echo
+	branch = bailey
