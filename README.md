@@ -78,7 +78,7 @@ optional arguments:
 ## For more help:
 ~~~
 Example,
-	$ ./script -p vacation 
+	$ ./script -w vacation -p 
 
 Usage: ./build/bench/stamp-kozy/vacation/vacation [options]
 
