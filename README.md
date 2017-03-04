@@ -35,7 +35,7 @@ librpmem
 ## To run:
 ~~~
 	$ cd whisper
-	$ ./script.py -c -z {s|m|l} -w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation}
+	$ ./script.py -r -z {s|m|l} -w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation}
 ~~~
 
 ## To clean:
