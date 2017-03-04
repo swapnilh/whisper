@@ -18,6 +18,7 @@ __nfs = 'nfs'
 __exm = 'exim'
 __sql = 'sql'
 __all = 'all'
+__emt = 'empty'
 
 workload_l = []
 workload_l.append(__ycs)
@@ -61,7 +62,7 @@ size_l.append(__xxl)
 parser = argparse.ArgumentParser(prog="script", description="Buildi, Clean, Run, Update WHISPER")
 parser.add_argument('-b', dest='build', action='store_true', default=False, help="Build workload")
 parser.add_argument('-r', dest='run'  , action='store_true', default=False, help="Run workload")
-parser.add_argument('-w', dest='workload', required=True, help="Workload", choices=workload_l)
+parser.add_argument('-w', dest='workload', default=__emt, help="Workload", choices=workload_l)
 parser.add_argument('-z', dest='size', default=__l, help="Set workload size", choices=size_l)
 parser.add_argument('-t', dest='trace', action='store_true', default=False, help="Enable tracing. Need to be root.")
 parser.add_argument('-c', dest='clean', action='store_true', default=False, help="Clean workload")
