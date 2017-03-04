@@ -49,17 +49,34 @@ dir_l.append(__nvml)
 dir_l.append(__reds)
 dir_l.append(__pmfs)
 
-parser = argparse.ArgumentParser(prog="script", description="Build or Run WHISPER")
+__l = 'l'
+__xl = 'xl'
+__xxl = 'xxl'
+
+size_l = []
+size_l.append(__l)
+size_l.append(__xl)
+size_l.append(__xxl)
+
+parser = argparse.ArgumentParser(prog="script", description="Buildi, Clean, Run, Update WHISPER")
 parser.add_argument('-b', dest='build', action='store_true', default=False, help="Build workload")
-parser.add_argument('-c', dest='clean', action='store_true', default=False, help="Clean workload")
 parser.add_argument('-r', dest='run'  , action='store_true', default=False, help="Run workload")
 parser.add_argument('-w', dest='workload', required=True, help="Workload", choices=workload_l)
+parser.add_argument('-z', dest='size', default=__l, help="Set workload size", choices=size_l)
+parser.add_argument('-t', dest='trace', action='store_true', default=False, help="Enable tracing. Need to be root.")
+parser.add_argument('-c', dest='clean', action='store_true', default=False, help="Clean workload")
+parser.add_argument('-u', dest='update', action='store_true', default=False, help="Update benchmark")
+parser.add_argument('-p', dest='mhelp', action='store_true', default=False)
+
 
 try:
 	args = parser.parse_args()
 except:
 	sys.exit(0)
 
+def ex():
+	sys.exit(0)
+	
 def dbg(s):
 	
 	if DBG == 1:
@@ -154,7 +171,7 @@ def build(sysargs):
 			cmd = './make-tcmalloc.sh'
 			sh(cmd)
 
-		cmd = './build.sh'
+		cmd = 'make clean && make'
 		sh(cmd)
 
 		cd(__home)
@@ -346,6 +363,105 @@ def clean(sysargs):
 	else:
 		return
 		
+def more_help(sysargs):
+	
+	args = sysargs
+	w = args.workload
+	
+	if w == __ycs:
+
+		d = __nstr
+		dbg(d + ',' + w)
+		
+		cd(d)
+		cmd = './run.sh -h'
+		sh(cmd)
+		cd(__home)
+		
+	elif w == __tpc:
+
+		d = __nstr
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run.sh -h'
+		sh(cmd)
+		cd(__home)
+
+	elif w == __eco:
+
+		d = __echo 
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run.sh -h'
+		sh(cmd)
+		cd(__home)
+		
+
+	elif w == __red:
+		d = __reds
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run-redis-server.sh -h'
+		sh(cmd)
+		cmd = './run-redis-cli.sh -h'
+		sh(cmd)
+
+		cd(__home)
+
+	elif w == __ctr:
+		d = __nvml
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run_ctree.sh -h'
+		sh(cmd)
+		cd(__home)
+
+	elif w == __map:
+		d = __nvml
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run_hashmap.sh -h'
+		sh(cmd)
+		cd(__home)
+
+	elif w == __mem:
+		d = __nemo
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run_memcache.sh -h'
+		sh(cmd)
+		cmd = './run_memslap.sh -h'
+		sh(cmd)
+		cd(__home)
+
+	elif w == __vac:
+		d = __nemo
+		dbg(d + ',' + w)
+
+		cd(d)
+		cmd = './run_vacation.sh -h'
+		sh(cmd)
+		cd(__home)
+
+
+	elif w == __nfs:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	elif w == __exm:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	elif w == __sql:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	else:
+		return
+
 def run(sysargs):
 	
 	args = sysargs
@@ -359,6 +475,21 @@ if __name__ == '__main__':
 	r = args.run
 	c = args.clean
 	b = args.build
+	t = args.trace
+	u = args.update
+	p = args.mhelp
+	
+	if u is True:
+		cmd='git submodule update --remote'
+		msg(cmd)
+		sh(cmd)
+		cmd='git submodule status'
+		msg(cmd)
+		sh(cmd)
+		ex()
+	
+	if p is True:
+		more_help(args)
 	
 	if r is True:
 		if w == __all:
