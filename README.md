@@ -23,7 +23,7 @@ OR
 ~~~
    	$ git clone https://github.com/swapnilh/whisper.git
 	$ cd whisper
-	$ git submodule update --init
+	$ ./script -d
 ~~~
 
 ## To build:

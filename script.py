@@ -3,8 +3,9 @@
 import argparse
 import sys
 import os
+import time
 
-DBG = 0
+DBG = 1
 
 __ycs = 'ycsb'
 __tpc = 'tpcc'
@@ -50,24 +51,26 @@ dir_l.append(__nvml)
 dir_l.append(__reds)
 dir_l.append(__pmfs)
 
-__l = 'l'
-__xl = 'xl'
-__xxl = 'xxl'
+__s = 'small'
+__m = 'med'
+__l = 'large'
 
 size_l = []
+size_l.append(__s)
+size_l.append(__m)
 size_l.append(__l)
-size_l.append(__xl)
-size_l.append(__xxl)
 
 parser = argparse.ArgumentParser(prog="script", description="Buildi, Clean, Run, Update WHISPER")
+parser.add_argument('-d', dest='downld', action='store_true', default=False, help="Download workload")
 parser.add_argument('-b', dest='build', action='store_true', default=False, help="Build workload")
 parser.add_argument('-r', dest='run'  , action='store_true', default=False, help="Run workload")
 parser.add_argument('-w', dest='workload', default=__emt, help="Workload", choices=workload_l)
 parser.add_argument('-z', dest='size', default=__l, help="Set workload size", choices=size_l)
 parser.add_argument('-t', dest='trace', action='store_true', default=False, help="Enable tracing. Need to be root.")
 parser.add_argument('-c', dest='clean', action='store_true', default=False, help="Clean workload")
+parser.add_argument('-s', dest='scratch', action='store_true', default=False, help="Clean workload and dependencies")
 parser.add_argument('-u', dest='update', action='store_true', default=False, help="Update benchmark")
-parser.add_argument('-p', dest='mhelp', action='store_true', default=False)
+parser.add_argument('-p', dest='mhelp', action='store_true', default=False, help="More help for a workload")
 
 
 try:
@@ -85,7 +88,7 @@ def dbg(s):
 	
 def msg(s):
 	
-	print s
+	print '\n' + '>>> ' + s + '\n'
 
 def cd(dirt):
 	
@@ -107,6 +110,7 @@ def cd(dirt):
 def sh(cmd):
 	
 	dbg(cmd)
+	msg(cmd)
 	try:
 		os.system(cmd)
 	except:
@@ -132,7 +136,6 @@ def build(sysargs):
 	if w == __ycs:
 
 		d = __nstr
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -148,7 +151,6 @@ def build(sysargs):
 	elif w == __tpc:
 
 		d = __nstr
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -164,7 +166,6 @@ def build(sysargs):
 	elif w == __eco:
 
 		d = __echo 
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -179,7 +180,6 @@ def build(sysargs):
 		
 	elif w == __red:
 		d = __reds
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -190,7 +190,6 @@ def build(sysargs):
 
 	elif w == __ctr:
 		d = __nvml
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -201,7 +200,6 @@ def build(sysargs):
 
 	elif w == __map:
 		d = __nvml
-		dbg(d + ',' + w)
 		
 		cd(d)
 
@@ -212,22 +210,20 @@ def build(sysargs):
 
 	elif w == __mem:
 		d = __nemo
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		cmd = 'scons --build-bench=memcached'
+		cmd = 'scons --build-bench=memcached --config-ftrace'
 		sh(cmd)
 
 		cd(__home)
 
 	elif w == __vac:
 		d = __nemo
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		cmd = 'scons --build-bench=stamp-kozy'
+		cmd = 'scons --build-bench=stamp-kozy --config-ftrace'
 		sh(cmd)
 
 		cd(__home)
@@ -248,18 +244,18 @@ def clean(sysargs):
 	
 	args = sysargs
 	w = args.workload
+	s = args.scratch
 	
 	if w == __ycs:
 
 		d = __nstr
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		if stat('Makefile') == 1:
+		if s is True:
 			cmd = './bootstrap;./configure'
 			sh(cmd)
-
+			
 		cmd = 'make clean'
 		sh(cmd)
 
@@ -268,11 +264,10 @@ def clean(sysargs):
 	elif w == __tpc:
 
 		d = __nstr
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		if stat('Makefile') == 1:
+		if s is True:
 			cmd = './bootstrap;./configure'
 			sh(cmd)
 
@@ -284,11 +279,10 @@ def clean(sysargs):
 	elif w == __eco:
 
 		d = __echo 
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		if stat('malloc/gperftools-2.0/Makefile') == 1:
+		if s is True:
 			cmd = './make-tcmalloc.sh'
 			sh(cmd)
 
@@ -299,56 +293,71 @@ def clean(sysargs):
 		
 	elif w == __red:
 		d = __reds
-		dbg(d + ',' + w)
 		
 		cd(d)
 
 		cmd = './clean.sh'
 		sh(cmd)
+
+		if s is True:
+			cmd = 'make distclean'
+			sh(cmd)
 
 		cd(__home)
 
 	elif w == __ctr:
 		d = __nvml
-		dbg(d + ',' + w)
 		
 		cd(d)
 
 		cmd = './clean.sh'
 		sh(cmd)
+		
+		if s is True:
+			cmd = 'make distclean'
+			sh(cmd)
 
 		cd(__home)
 
 	elif w == __map:
 		d = __nvml
-		dbg(d + ',' + w)
 		
 		cd(d)
 
 		cmd = './clean.sh'
 		sh(cmd)
+		
+		if s is True:
+			cmd = 'make distclean'
+			sh(cmd)
 
 		cd(__home)
 
 	elif w == __mem:
 		d = __nemo
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		cmd = 'rm -fr build/'
+		cmd = 'rm -fr build/memcached*/'
 		sh(cmd)
+		
+		if s is True:
+			cmd = 'rm -fr build/'
+			sh(cmd)
 
 		cd(__home)
 
 	elif w == __vac:
 		d = __nemo
-		dbg(d + ',' + w)
 		
 		cd(d)
 
-		cmd = 'rm -fr build/'
+		cmd = 'rm -fr build/stamp*/'
 		sh(cmd)
+		
+		if s is True:
+			cmd = 'rm -fr build/'
+			sh(cmd)
 
 		cd(__home)
 
@@ -372,7 +381,6 @@ def more_help(sysargs):
 	if w == __ycs:
 
 		d = __nstr
-		dbg(d + ',' + w)
 		
 		cd(d)
 		cmd = './run.sh -h'
@@ -382,7 +390,6 @@ def more_help(sysargs):
 	elif w == __tpc:
 
 		d = __nstr
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run.sh -h'
@@ -392,7 +399,6 @@ def more_help(sysargs):
 	elif w == __eco:
 
 		d = __echo 
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run.sh -h'
@@ -402,7 +408,6 @@ def more_help(sysargs):
 
 	elif w == __red:
 		d = __reds
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run-redis-server.sh -h'
@@ -414,7 +419,6 @@ def more_help(sysargs):
 
 	elif w == __ctr:
 		d = __nvml
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run_ctree.sh -h'
@@ -423,7 +427,6 @@ def more_help(sysargs):
 
 	elif w == __map:
 		d = __nvml
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run_hashmap.sh -h'
@@ -432,7 +435,6 @@ def more_help(sysargs):
 
 	elif w == __mem:
 		d = __nemo
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run_memcache.sh -h'
@@ -443,7 +445,6 @@ def more_help(sysargs):
 
 	elif w == __vac:
 		d = __nemo
-		dbg(d + ',' + w)
 
 		cd(d)
 		cmd = './run_vacation.sh -h'
@@ -463,16 +464,175 @@ def more_help(sysargs):
 	else:
 		return
 
+def z2s(z):
+	# convert size variable to string
+	
+	if z not in size_l:
+		msg('please pass a valid workload size from ' + str(size_l))
+		ex()
+	
+	return ' --' + z
+	
+def w2s(w):
+	# convert workload variable to string
+	
+	if w not in workload_l:
+		msg('please pass a valid workload from ' + str(workload_l))
+		ex()
+	
+	return ' --' + w
+
+def t2s(t):
+	
+	# convert trace variable to string
+	
+	if t is True:
+		msg('For trace : $ cat /sys/kernel/debug/trace_pipe')
+		return ' --trace'
+	else:
+		return ''
+		
+def su(t):
+	
+	# convert privileges
+	
+	if t is True:
+		msg('Need to be root for trace.')
+		return 'sudo '
+	else:
+		return ''
+
+def sleep(t):
+	time.sleep(t)
+	
 def run(sysargs):
 	
 	args = sysargs
 	w = args.workload
+	z = args.size
+	t = args.trace
 	
-	print w
+	if w == __ycs:
+
+		d = __nstr
+		
+		cd(d)
+		cmd = su(t) + './run.sh' + z2s(z) + w2s(w) + t2s(t)
+		dbg(cmd)
+		
+		sh(cmd)
+		cd(__home)
+		
+	elif w == __tpc:
+
+		d = __nstr
+
+		cd(d)
+		cmd = su(t) + './run.sh' + z2s(z) + w2s(w) + t2s(t)
+		dbg(cmd)
+		
+		sh(cmd)
+		cd(__home)
+
+	elif w == __eco:
+
+		d = __echo 
+
+		cd(d)
+		cmd = su(t) + './run.sh' + z2s(z) + t2s(t)
+		dbg(cmd)
+		
+		sh(cmd)
+		cd(__home)
+		
+
+	elif w == __red:
+		d = __reds
+
+		cd(d)
+		
+
+		cmd = su(t) + './run-redis-server.sh' + t2s(t)
+		dbg(cmd)
+		sh(cmd)
+		
+		sleep(2)
+		msg('starting redis client')
+		
+		cmd = './run-redis-cli.sh' + z2s(z)
+		dbg(cmd)
+		sh(cmd)
+		
+		cmd = su(t) + "kill -s SIGKILL `pgrep redis`"
+		sh(cmd)
+		
+		cd(__home)
+
+	elif w == __ctr:
+		d = __nvml
+
+		cd(d)
+		cmd = su(t) + './run_ctree.sh' + z2s(z) + t2s(t)
+
+		sh(cmd)
+		cd(__home)
+
+	elif w == __map:
+		d = __nvml
+
+		cd(d)
+		cmd = su(t) + './run_hashmap.sh' + z2s(z) + t2s(t)
+		
+		sh(cmd)
+		cd(__home)
+
+	elif w == __mem:
+		d = __nemo
+
+		cd(d)
+
+		cmd = su(t) + './run_memcache.sh' + t2s(t)
+		dbg(cmd)
+		sh(cmd)
+		
+		sleep(2)
+		msg('starting memslap client')
+		
+		cmd = './run_memslap.sh' + z2s(z)
+		dbg(cmd)
+		sh(cmd)
+		
+		cmd = su(t) + "kill -s SIGKILL `pgrep memcached`"
+		sh(cmd)
+
+		cd(__home)
+
+	elif w == __vac:
+		d = __nemo
+
+		cd(d)
+		cmd = su(t) + './run.sh' + z2s(z) + w2s(w) + t2s(t)
+		sh(cmd)
+		cd(__home)
+
+
+	elif w == __nfs:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	elif w == __exm:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	elif w == __sql:
+		d = __pmfs
+		msg('please visit github.com/snalli/PMFS-new');
+	else:
+		return
+
 	
 if __name__ == '__main__':
 
 	w = args.workload
+	d = args.downld
 	r = args.run
 	c = args.clean
 	b = args.build
@@ -480,12 +640,14 @@ if __name__ == '__main__':
 	u = args.update
 	p = args.mhelp
 	
+	if d is True:
+		cmd='git submodule update --init'
+		sh(cmd)
+
 	if u is True:
 		cmd='git submodule update --remote'
-		msg(cmd)
 		sh(cmd)
 		cmd='git submodule status'
-		msg(cmd)
 		sh(cmd)
 		ex()
 	
