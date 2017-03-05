@@ -5,7 +5,7 @@ import sys
 import os
 import time
 
-DBG = 1
+DBG = 0
 
 __ycs = 'ycsb'
 __tpc = 'tpcc'
