@@ -22,3 +22,7 @@
 	path = kv-echo
 	url = https://github.com/snalli/echo
 	branch = bailey
+[submodule "eliza"]
+	path = eliza
+	url = https://github.com/snalli/eliza
+	branch = master
