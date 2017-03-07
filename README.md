@@ -29,19 +29,22 @@ OR
 ## To build:
 ~~~
 	$ cd whisper
-	$ ./script.py -b -w	{ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
+	$ ./script.py -b \
+		-w	{ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
 ~~~
 
 ## To run (tracing is optional, but need to be root for it):
 ~~~
 	$ cd whisper
-	$ ./script.py -c [-t] -z {l|xl|xxl} -w  {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
+	$ ./script.py -c [-t] -z {small|med|large} \
+		-w  {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
 ~~~
 
 ## To clean:
 ~~~
 	$ cd whisper
-	$ ./script.py -c -w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
+	$ ./script.py -c \
+		-w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
 ~~~
 
 ## To update:
@@ -58,25 +61,25 @@ OR
 	$ cd whisper
 	$ ./script -h
 
-usage: script [-h] [-b] [-r] -w
-              {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
-              [-z {l,xl,xxl}] [-t] [-c] [-u]
-              [-p {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}]
+usage: script [-h] [-d] [-b] [-r]
+              [-w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}]
+              [-z {small,med,large}] [-t] [-c] [-s] [-u] [-p]
 
 Buildi, Clean, Run, Update WHISPER
 
 optional arguments:
   -h, --help            show this help message and exit
+  -d                    Download workload
   -b                    Build workload
   -r                    Run workload
   -w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
                         Workload
-  -z {l,xl,xxl}         Set workload size
+  -z {small,med,large}  Set workload size
   -t                    Enable tracing. Need to be root.
   -c                    Clean workload
+  -s                    Clean workload and dependencies
   -u                    Update benchmark
-  -p {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
-                        More help with a workload
+  -p                    More help for a workload
 
 ~~~
 
