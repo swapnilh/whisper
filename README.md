@@ -40,7 +40,7 @@ OR
 ## To run (tracing is optional, but need to be root for it):
 ~~~
 	$ cd whisper
-	$ ./script.py -c [-t] -z {small|med|large} \
+	$ ./script.py -r [-t] -z {small|med|large} \
 		-w  {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}
 ~~~
 
