@@ -649,6 +649,8 @@ if __name__ == '__main__':
 		sh(cmd)
 		cmd='git submodule status'
 		sh(cmd)
+		cmd='git pull'
+		sh(cmd)
 		ex()
 	
 	if p is True:
