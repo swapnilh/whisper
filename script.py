@@ -645,11 +645,11 @@ if __name__ == '__main__':
 		sh(cmd)
 
 	if u is True:
-		cmd='git submodule update --remote'
+		cmd='git pull'
+		sh(cmd)
+		cmd='git submodule update'
 		sh(cmd)
 		cmd='git submodule status'
-		sh(cmd)
-		cmd='git pull'
 		sh(cmd)
 		ex()
 	
