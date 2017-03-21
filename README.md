@@ -110,3 +110,10 @@ Options:                                             (defaults)
 1. Nstore build fails (no such instruction: clflushopt)
 Older machines may not support CLFLUSHOPT to change CLFLUSH to 
 CLFLUSHOPT in whisper/nstore/src/common/libpm.h 
+
+2. Echo runtime error - no free memory of size XX available.
+The persistent memory pool has run out of space. It is stored
+as a file on disk (/dev/shm/efile/ by default). Delete this
+file. If this doesn't work, increase the size of the PM pool
+in kv-echo/echo/include/pm_instr.h by increasing value of 
+the macro - PSEGMENT_RESERVED_REGION_SIZE
