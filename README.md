@@ -27,7 +27,7 @@ OR
 ~~~
    	$ git clone https://github.com/swapnilh/whisper.git
 	$ cd whisper
-	$ ./script -d
+	$ ./script.py -d
 ~~~
 
 ## To build:
@@ -54,7 +54,7 @@ OR
 ## To update:
 ~~~
 	$ cd whisper
-	$ ./script -u
+	$ ./script.py -u
 	git submodule update --remote
 	git submodule update status
 
@@ -63,9 +63,9 @@ OR
 ## For help:
 ~~~
 	$ cd whisper
-	$ ./script -h
+	$ ./script.py -h
 
-usage: script [-h] [-d] [-b] [-r]
+usage: script.py [-h] [-d] [-b] [-r]
               [-w {ycsb,tpcc,echo,redis,ctree,hashmap,memcached,vacation,nfs,exim,sql,all}]
               [-z {small,med,large}] [-t] [-c] [-s] [-u] [-p]
 
@@ -90,7 +90,7 @@ optional arguments:
 ## For more help:
 ~~~
 Example,
-	$ ./script -w vacation -p 
+	$ ./script.py -w vacation -p 
 
 Usage: ./build/bench/stamp-kozy/vacation/vacation [options]
 
@@ -104,3 +104,9 @@ Options:                                             (defaults)
     e <UINT>   Enable trac[e] collection             (0)
 
 ~~~
+
+## Common Issues:
+~~~
+1. Nstore build fails (no such instruction: clflushopt)
+Older machines may not support CLFLUSHOPT to change CLFLUSH to 
+CLFLUSHOPT in whisper/nstore/src/common/libpm.h 
