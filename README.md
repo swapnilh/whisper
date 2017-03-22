@@ -105,15 +105,17 @@ Options:                                             (defaults)
 
 ~~~
 
-## Common Issues:
+## FAQs :
 ~~~
-1. Nstore build fails (no such instruction: clflushopt)
-Older machines may not support CLFLUSHOPT to change CLFLUSH to 
-CLFLUSHOPT in whisper/nstore/src/common/libpm.h 
 
-2. Echo runtime error - no free memory of size XX available.
-The persistent memory pool has run out of space. It is stored
-as a file on disk (/dev/shm/efile/ by default). Delete this
-file. If this doesn't work, increase the size of the PM pool
-in kv-echo/echo/include/pm_instr.h by increasing value of 
-the macro - PSEGMENT_RESERVED_REGION_SIZE
+#### 1. For Nstore-{YCSB, TPCC} and Echo I get a runtime error that says "no free memory of size 128 available". What do I do ?
+
+Nstore and Echo create a file in /dev/shm (zfile for nstore and efile for echo}
+which act as persistent memory pools. So does every application in WHISPER.
+The default size is 1GB. When space is low,
+the above error is thrown. Simply increase it by altering the PSEGMENT_RESERVED_REGION_SIZE
+in Nstore and Echo. Delete the old pool, recompile and re-run. Suggested sizes are :
+
+2GB = (2UL * 1024 * 1024 * 1024)
+4GB = (4UL * 1024 * 1024 * 1024)
+8GB = (8UL * 1024 * 1024 * 1024)
