@@ -169,9 +169,9 @@ def build(sysargs):
 		
 		cd(d)
 
-		if stat('malloc/gperftools-2.0/Makefile') == 1:
-			cmd = './make-tcmalloc.sh'
-			sh(cmd)
+                cmd = './make-tcmalloc.sh'
+                sh(cmd)
+                sh(cmd) # first one fails somehow
 
 		cmd = 'make clean && make'
 		sh(cmd)
@@ -283,7 +283,11 @@ def clean(sysargs):
 		cd(d)
 
 		if s is True:
-			cmd = './make-tcmalloc.sh'
+			cmd = 'rm malloc/libtcmalloc*'
+			sh(cmd)
+			cmd = 'rm malloc/pkgconfig/libprofiler*'
+			sh(cmd)
+			cmd = 'rm malloc/pkgconfig/libtcmalloc*'
 			sh(cmd)
 
 		cmd = 'make clean'
