@@ -106,7 +106,6 @@ Options:                                             (defaults)
 ~~~
 
 ## FAQs :
-~~~
 
 #### 1. For Nstore-{YCSB, TPCC} and Echo I get a runtime error that says "no free memory of size 128 available". What do I do ?
 
