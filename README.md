@@ -116,7 +116,7 @@ The default size is 1GB. When space is low,
 the above error is thrown. We will make this a run time parameter in the future. For now, simply increase it by altering the PSEGMENT_RESERVED_REGION_SIZE
 in Nstore and Echo. You may find this variable by using grep, cscope or any indexing tool for browsing source code. 
 Its location varies with application. Delete the old pool, recompile and re-run. Suggested sizes are as shown.
-Please pay attention to the format of defining the size i.e. XXX * 1024 * 1024 * 1024.
+Please pay attention to the format of defining the size i.e. XXX * 1024 * 1024 * 1024. This is in bytes.
 
 ~~~
 #define PSEGMENT_RESERVED_REGION_SIZE (2UL * 1024 * 1024 * 1024) // 2GB
