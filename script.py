@@ -171,7 +171,6 @@ def build(sysargs):
 
                 cmd = './make-tcmalloc.sh'
                 sh(cmd)
-                sh(cmd) # first one fails somehow
 
 		cmd = 'make clean && make'
 		sh(cmd)
